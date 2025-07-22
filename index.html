@@ -487,32 +487,37 @@ document.addEventListener('DOMContentLoaded', function () {
     let analysisChart = null; // To hold the chart instance
 
     async function callGeminiAPI(prompt) {
-        const apiKey = process.env.GEMINI_API_KEY; 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-        const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-
         try {
-            const response = await fetch(apiUrl, {
+            console.log("Making API call to Gemini with prompt:", prompt);
+            
+            const response = await fetch('/api/gemini', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt })
             });
+
             if (!response.ok) {
-                 const errorBody = await response.text();
-                 throw new Error(`API call failed with status: ${response.status}. Body: ${errorBody}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const result = await response.json();
-            if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
-                return result.candidates[0].content.parts[0].text;
+
+            const data = await response.json();
+            
+            // Extract the text content from Gemini's response
+            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                const textContent = data.candidates[0].content.parts[0].text;
+                return textContent;
             } else {
-                console.error("Unexpected API response structure:", result);
-                return JSON.stringify({ error: "Could not retrieve a valid response from the AI." });
+                throw new Error('Invalid response format from Gemini API');
             }
+            
         } catch (error) {
-            console.error("Error calling Gemini API:", error);
-            return JSON.stringify({ error: "An error occurred while contacting the AI assistant." });
+            console.error('Error calling Gemini API:', error);
+            throw error;
         }
     }
+    
     // Utility to safely parse JSON that might be wrapped in markdown
     function parseJsonFromMarkdown(text) {
         const match = text.match(/```json\s*([\s\S]*?)\s*```/);
@@ -577,9 +582,8 @@ document.addEventListener('DOMContentLoaded', function () {
               ${jobDescription}
             `;
 
-            const resultString = await callGeminiAPI(prompt);
-            
             try {
+                const resultString = await callGeminiAPI(prompt);
                 const analysis = parseJsonFromMarkdown(resultString);
                 if (analysis) {
                     renderAnalysis(analysis);
@@ -588,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (e) {
                 console.error("Failed to parse or render AI response:", e);
-                outputDiv.innerHTML = `<div class="p-6 bg-red-50 text-red-700 rounded-lg"><strong>Error:</strong> The AI returned an invalid response. Please check the console for details and try again.</div>`;
+                outputDiv.innerHTML = `<div class="p-6 bg-red-50 text-red-700 rounded-lg"><strong>Error:</strong> ${e.message || 'The AI returned an invalid response. Please check the console for details and try again.'}</div>`;
             } finally {
                 analyzeBtn.disabled = false;
                 analyzeBtn.textContent = 'Analyze Fit';
@@ -763,10 +767,8 @@ document.addEventListener('DOMContentLoaded', function () {
               "${question}"
             `;
             
-            const resultString = await callGeminiAPI(prompt);
-            hideTypingIndicator();
-            
             try {
+                const resultString = await callGeminiAPI(prompt);
                 const response = parseJsonFromMarkdown(resultString);
                 if (response && response.answer) {
                     addMessageToChat('bot', response.answer);
@@ -775,7 +777,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (error) {
                 console.error("Chatbot response error:", error);
-                addMessageToChat('bot', "I'm sorry, I had a little trouble processing that. Could you try rephrasing your question?");
+                addMessageToChat('bot', `I'm sorry, I had a little trouble processing that: ${error.message}. Could you try rephrasing your question?`);
+            } finally {
+                hideTypingIndicator();
             }
         });
 

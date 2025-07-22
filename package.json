@@ -1,0 +1,17 @@
+{
+  "name": "ai-portfolio",
+  "version": "1.0.0",
+  "description": "Sathya Balamurugan's AI-powered portfolio with Gemini integration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for static site'",
+    "start": "vercel dev"
+  },
+  "keywords": ["portfolio", "ai", "data-science", "gemini"],
+  "author": "Sathya Balamurugan",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

@@ -13,6 +13,12 @@ export default async function handler(req, res) {
   
     // This is where we securely use the Environment Variable on the server
     const apiKey = process.env.GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      console.error('GEMINI_API_KEY environment variable is not set');
+      return res.status(500).json({ error: 'API key not configured' });
+    }
+    
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
   
     try {
@@ -24,6 +30,7 @@ export default async function handler(req, res) {
   
       if (!geminiResponse.ok) {
         const errorText = await geminiResponse.text();
+        console.error('Gemini API error:', errorText);
         throw new Error(`Gemini API failed: ${errorText}`);
       }
   

@@ -487,33 +487,35 @@ document.addEventListener('DOMContentLoaded', function () {
     let analysisChart = null; // To hold the chart instance
 
     async function callGeminiAPI(prompt) {
-        // This is a placeholder for a backend API call.
-        // In a real application, you would fetch from your server endpoint.
-        // For demonstration, this will be simulated.
-        console.log("Making mock API call with prompt:", prompt);
+        try {
+            console.log("Making API call to Gemini with prompt:", prompt);
+            
+            const response = await fetch('/api/gemini', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt })
+            });
 
-        // Simulate a network delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // This is a mock response. A real backend would generate this with an LLM.
-        const mockResponse = {
-            "overallScore": 92,
-            "technicalSkillsScore": 95,
-            "experienceRelevanceScore": 88,
-            "pros": [
-                "Excellent alignment in core technical skills like Python, Spark, and SQL, which are central to the job description.",
-                "Proven experience in building and deploying machine learning models in a cloud environment (AWS), directly matching the role's requirements.",
-                "Demonstrated ability to deliver business value through data, with quantified results like cost savings and improved model accuracy."
-            ],
-            "cons": [
-                "While proficient in Azure, the latest role emphasizes AWS; may need to brush up on specific AWS services mentioned in the JD.",
-                "Experience seems more focused on financial and operational data; could be a point of discussion if the role involves a different domain."
-            ],
-            "hireDecision": "Strong Hire",
-            "hireReasoning": "The candidate is an excellent fit for this role. Their technical skills are a near-perfect match, and they have concrete, quantifiable achievements in data science and engineering. The experience at Cognizant and Avyra Technologies is particularly relevant. The minor gap in specific AWS services is easily bridgeable given their cloud experience."
-        };
-        
-        return `\`\`\`json\n${JSON.stringify(mockResponse, null, 2)}\n\`\`\``;
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            // Extract the text content from Gemini's response
+            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                const textContent = data.candidates[0].content.parts[0].text;
+                return textContent;
+            } else {
+                throw new Error('Invalid response format from Gemini API');
+            }
+            
+        } catch (error) {
+            console.error('Error calling Gemini API:', error);
+            throw error;
+        }
     }
     
     // Utility to safely parse JSON that might be wrapped in markdown
@@ -580,9 +582,8 @@ document.addEventListener('DOMContentLoaded', function () {
               ${jobDescription}
             `;
 
-            const resultString = await callGeminiAPI(prompt);
-            
             try {
+                const resultString = await callGeminiAPI(prompt);
                 const analysis = parseJsonFromMarkdown(resultString);
                 if (analysis) {
                     renderAnalysis(analysis);
@@ -591,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (e) {
                 console.error("Failed to parse or render AI response:", e);
-                outputDiv.innerHTML = `<div class="p-6 bg-red-50 text-red-700 rounded-lg"><strong>Error:</strong> The AI returned an invalid response. Please check the console for details and try again.</div>`;
+                outputDiv.innerHTML = `<div class="p-6 bg-red-50 text-red-700 rounded-lg"><strong>Error:</strong> ${e.message || 'The AI returned an invalid response. Please check the console for details and try again.'}</div>`;
             } finally {
                 analyzeBtn.disabled = false;
                 analyzeBtn.textContent = 'Analyze Fit';
@@ -766,10 +767,8 @@ document.addEventListener('DOMContentLoaded', function () {
               "${question}"
             `;
             
-            const resultString = await callGeminiAPI(prompt);
-            hideTypingIndicator();
-            
             try {
+                const resultString = await callGeminiAPI(prompt);
                 const response = parseJsonFromMarkdown(resultString);
                 if (response && response.answer) {
                     addMessageToChat('bot', response.answer);
@@ -778,7 +777,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (error) {
                 console.error("Chatbot response error:", error);
-                addMessageToChat('bot', "I'm sorry, I had a little trouble processing that. Could you try rephrasing your question?");
+                addMessageToChat('bot', `I'm sorry, I had a little trouble processing that: ${error.message}. Could you try rephrasing your question?`);
+            } finally {
+                hideTypingIndicator();
             }
         });
 

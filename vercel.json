@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/gemini.js": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/gemini",
+      "dest": "/api/gemini.js"
+    }
+  ]
+} 

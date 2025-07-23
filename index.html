@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg-color: #FFFFFF;
@@ -19,7 +18,6 @@
             --accent-color: #4A6FA5;
             --border-color: #EAEAEA;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -27,18 +25,16 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-
         h1, h2, h3, h4, .font-serif {
             font-family: 'Playfair Display', serif;
             font-weight: 500;
         }
-        
         /* Header styles for scroll behavior */
         #main-header {
             transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         #main-header.scrolled {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -49,7 +45,6 @@
         #main-header.scrolled .nav-link:hover {
             color: var(--accent-color);
         }
-
         .section-title {
             font-size: 1rem;
             font-weight: 500;
@@ -58,18 +53,15 @@
             text-transform: uppercase;
             margin-bottom: 2rem;
         }
-
         .fade-in-up {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
         .fade-in-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
         .typewriter-cursor {
             display: inline-block;
             width: 2px;
@@ -79,12 +71,10 @@
             vertical-align: bottom;
             margin-left: 4px;
         }
-
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-        
         .custom-button {
             display: inline-block;
             background-color: var(--accent-color);
@@ -108,7 +98,6 @@
              background-color: #EAEAEA;
              box-shadow: none;
         }
-
         .loader {
             border: 3px solid #f3f3f3;
             border-top: 3px solid var(--accent-color);
@@ -122,7 +111,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         /* Chatbot Styles */
         #chat-window {
             opacity: 0;
@@ -179,10 +167,74 @@
           0%, 80%, 100% { transform: scale(0); }
           40% { transform: scale(1.0); }
         }
+        /* Premium UI Enhancements */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #EAEAEA, transparent);
+            margin: 4rem 0;
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-color), #6A5ACD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.05) 0%, rgba(106, 90, 205, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+        .skill-bar-bg {
+            background: linear-gradient(to right, rgba(74, 111, 165, 0.1), rgba(106, 90, 205, 0.1));
+        }
+        .timeline-marker {
+            position: relative;
+        }
+        .timeline-marker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
+        }
+        .timeline-line {
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 3rem);
+            background: linear-gradient(to bottom, var(--accent-color), #EAEAEA);
+        }
+        .project-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .project-card:hover {
+            border-color: rgba(74, 111, 165, 0.2);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
 <body class="antialiased">
-
     <!-- New Navigation Header -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-6 md:px-8">
@@ -200,27 +252,31 @@
     </header>
 
     <main class="max-w-4xl mx-auto px-6 md:px-8">
-        
+        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex flex-col justify-center items-start text-left py-20">
             <div class="w-full">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif leading-tight" id="profile-name"></h1>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif leading-tight gradient-text" id="profile-name"></h1>
                 <div class="mt-4 text-2xl md:text-3xl font-light text-gray-600 h-10">
                     <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                 </div>
-                <p class="mt-12 text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl" id="summary-text"></p>
+                <div class="hero-gradient mt-12">
+                    <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl" id="summary-text"></p>
+                </div>
                 <div id="contact-info" class="mt-12 flex items-center space-x-4"></div>
             </div>
         </section>
-
-        <!-- Section with alternate background -->
-        <section id="ai-screener" class="py-24 md:py-32 fade-in-up bg-gray-50 -mx-6 md:-mx-8 px-6 md:px-8">
+        
+        <div class="section-divider"></div>
+        
+        <!-- AI Screener Section -->
+        <section id="ai-screener" class="py-24 md:py-32 fade-in-up">
             <div class="max-w-4xl mx-auto">
                 <h2 class="section-title text-center">AI Career Bot</h2>
                 <div class="text-center max-w-3xl mx-auto">
                      <p class="text-2xl md:text-3xl font-serif mb-8">See how I fit your role.</p>
                      <p class="text-lg text-gray-600 mb-10">Paste a job description below for an instant analysis of my qualifications. An AI will provide a detailed breakdown of my fit, including match scores, a pros and cons list, and a final hiring recommendation.</p>
                 </div>
-                <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl border border-gray-200 shadow-sm card-hover">
                     <div class="w-full">
                         <label for="job-description" class="block text-md font-medium text-gray-600 mb-3">Paste Job Description Here:</label>
                         <textarea id="job-description" rows="8" class="w-full p-4 text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-200 focus:border-transparent transition bg-gray-50" placeholder="Paste the full text of the job description..."></textarea>
@@ -236,7 +292,10 @@
                 </div>
             </div>
         </section>
-
+        
+        <div class="section-divider"></div>
+        
+        <!-- Skills Section -->
         <section id="skills" class="py-24 md:py-32 fade-in-up">
             <h2 class="section-title text-center">Skills Showcase</h2>
              <div class="text-center max-w-3xl mx-auto">
@@ -254,20 +313,25 @@
                 </div>
             </div>
         </section>
-
-        <!-- Section with alternate background -->
-        <section id="experience" class="py-24 md:py-32 fade-in-up bg-gray-50 -mx-6 md:-mx-8 px-6 md:px-8">
+        
+        <div class="section-divider"></div>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 md:py-32 fade-in-up">
             <div class="max-w-4xl mx-auto">
                 <h2 class="section-title text-center">Career Journey</h2>
                 <div class="text-center max-w-3xl mx-auto">
                      <p class="text-2xl md:text-3xl font-serif mb-12">A consistent focus on delivering value through data.</p>
                 </div>
-                <div id="experience-timeline" class="space-y-16">
+                <div id="experience-timeline" class="space-y-16 relative">
                     <!-- Timeline items will be injected here -->
                 </div>
             </div>
         </section>
-
+        
+        <div class="section-divider"></div>
+        
+        <!-- Projects Section -->
         <section id="projects" class="py-24 md:py-32 fade-in-up">
             <h2 class="section-title text-center">Project Portfolio</h2>
             <div class="text-center max-w-3xl mx-auto">
@@ -277,9 +341,11 @@
                 <!-- Project cards will be injected here -->
             </div>
         </section>
-
-        <!-- Section with alternate background -->
-        <section id="education" class="py-24 md:py-32 fade-in-up bg-gray-50 -mx-6 md:-mx-8 px-6 md:px-8">
+        
+        <div class="section-divider"></div>
+        
+        <!-- Education Section -->
+        <section id="education" class="py-24 md:py-32 fade-in-up">
             <div class="max-w-4xl mx-auto">
                 <h2 class="section-title text-center">Education</h2>
                  <div class="text-center max-w-3xl mx-auto">
@@ -290,15 +356,15 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Footer -->
         <footer class="text-center py-16 text-gray-500">
             <p>&copy; <span id="year"></span> Sathya Balamurugan. Designed with care.</p>
         </footer>
-
     </main>
 
     <!-- Chatbot Button -->
-    <button id="chat-toggle-btn" class="fixed bottom-8 right-8 bg-blue-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform z-50">
+    <button id="chat-toggle-btn" class="fixed bottom-8 right-8 bg-blue-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform z-50 floating-element">
         <svg xmlns="http://www.w3.org/2000/svg" id="chat-open-icon" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.828 8.828 0 01-4.32-1.142.5.5 0 00-.63.078l-1.564 1.565a.5.5 0 01-.708-.707l1.565-1.565a.5.5 0 00.078-.63A8.828 8.828 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.586 14.586A7 7 0 0010 16c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6c0 1.44.506 2.753 1.357 3.812a.5.5 0 00.743-.546z" clip-rule="evenodd" />
         </svg>
@@ -337,10 +403,9 @@
         </div>
     </div>
 
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
+    // --- PROFILE DATA ---
     const profileData = {
         name: "Sathya Balamurugan",
         titles: ["Data Scientist", "Financial Analyst", "ML Engineer", "Problem Solver"],
@@ -486,6 +551,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let analysisChart = null; // To hold the chart instance
 
+    /**
+     * Calls the Gemini API to generate content based on a prompt.
+     * @param {string} prompt The prompt to send to the API.
+     * @param {object | null} generationConfig Optional configuration for the API call, e.g., to enforce JSON output.
+     * @returns {Promise<string>} The text response from the API.
+     */
     async function callGeminiAPI(prompt) {
         try {
             console.log("Making API call to Gemini with prompt:", prompt);
@@ -517,8 +588,12 @@ document.addEventListener('DOMContentLoaded', function () {
             throw error;
         }
     }
-    
-    // Utility to safely parse JSON that might be wrapped in markdown
+
+    /**
+     * Safely parses a JSON string that might be wrapped in markdown code blocks.
+     * @param {string} text The text to parse.
+     * @returns {object | null} The parsed JSON object or null if parsing fails.
+     */
     function parseJsonFromMarkdown(text) {
         const match = text.match(/```json\s*([\s\S]*?)\s*```/);
         const jsonString = match ? match[1] : text;
@@ -531,7 +606,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // This function sets up the AI screener section
+    /**
+     * Sets up the AI screener section, including the event listener for the analyze button.
+     */
     function setupAIScreener() {
         const analyzeBtn = document.getElementById('analyze-fit-btn');
         const outputDiv = document.getElementById('screener-output');
@@ -549,7 +626,6 @@ document.addEventListener('DOMContentLoaded', function () {
             analyzeBtn.textContent = 'Analyzing...';
             outputDiv.innerHTML = '<div class="loader"></div><p class="text-center text-gray-500">Analyzing... This may take a moment.</p>';
             outputDiv.classList.remove('hidden');
-            
             if (analysisChart) {
                 analysisChart.destroy();
             }
@@ -564,7 +640,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const prompt = `
               Act as an expert technical recruiter. Analyze the candidate's resume against the provided job description.
               Return a JSON object with the following structure, and no other text or formatting.
-              
               {
                 "overallScore": <A number from 0-100 representing the overall match>,
                 "technicalSkillsScore": <A number from 0-100 for technical skills alignment>,
@@ -574,21 +649,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 "hireDecision": <A string: "Strong Hire", "Good Fit", or "Potential to Grow">,
                 "hireReasoning": "<A concise paragraph explaining why this candidate is a good match for the role, or how they could grow into it. Mention their quick learning ability if there are gaps.>"
               }
-
               **Candidate Resume:**
               ${fullResumeText}
-
               **Job Description:**
               ${jobDescription}
             `;
 
+            const screenerGenerationConfig = {
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "OBJECT",
+                    properties: {
+                        "overallScore": { "type": "NUMBER" },
+                        "technicalSkillsScore": { "type": "NUMBER" },
+                        "experienceRelevanceScore": { "type": "NUMBER" },
+                        "pros": { "type": "ARRAY", "items": { "type": "STRING" } },
+                        "cons": { "type": "ARRAY", "items": { "type": "STRING" } },
+                        "hireDecision": { "type": "STRING" },
+                        "hireReasoning": { "type": "STRING" }
+                    },
+                    required: ["overallScore", "technicalSkillsScore", "experienceRelevanceScore", "pros", "cons", "hireDecision", "hireReasoning"]
+                }
+            };
+
             try {
-                const resultString = await callGeminiAPI(prompt);
+                const resultString = await callGeminiAPI(prompt, screenerGenerationConfig);
                 const analysis = parseJsonFromMarkdown(resultString);
                 if (analysis) {
                     renderAnalysis(analysis);
                 } else {
-                    throw new Error("Parsed JSON is null.");
+                    throw new Error("Parsed JSON is null. The AI response might be malformed.");
                 }
             } catch (e) {
                 console.error("Failed to parse or render AI response:", e);
@@ -600,13 +690,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- UPDATED RENDER ANALYSIS FUNCTION ---
+    /**
+     * Renders the analysis from the AI screener into the DOM.
+     * @param {object} analysis The analysis object returned from the API.
+     */
     function renderAnalysis(analysis) {
         const outputDiv = document.getElementById('screener-output');
-
         const prosList = analysis.pros.map(pro => `<li class="flex items-start"><svg class="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>${pro}</span></li>`).join('');
         const consList = analysis.cons.map(con => `<li class="flex items-start"><svg class="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg><span>${con}</span></li>`).join('');
-
+        
         const decisionColor = analysis.hireDecision === "Strong Hire" ? "bg-green-100 text-green-800" : analysis.hireDecision === "Good Fit" ? "bg-blue-100 text-blue-800" : "bg-yellow-100 text-yellow-800";
         const decisionBorder = analysis.hireDecision === "Strong Hire" ? "border-green-200" : analysis.hireDecision === "Good Fit" ? "border-blue-200" : "border-yellow-200";
 
@@ -622,7 +714,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p class="text-gray-700 leading-relaxed">${analysis.hireReasoning}</p>
                     </div>
                 </div>
-
                 <!-- Scores and Chart -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div class="relative h-60 w-60 md:h-64 md:w-64 mx-auto">
@@ -644,7 +735,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 </div>
-
                 <!-- Pros and Cons -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-200 pt-8">
                     <div>
@@ -699,6 +789,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    /**
+     * Sets up the chatbot functionality, including UI toggles and form submission.
+     */
     function setupChatbot() {
         const chatToggleBtn = document.getElementById('chat-toggle-btn');
         const chatOpenIcon = document.getElementById('chat-open-icon');
@@ -731,14 +824,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const isHidden = chatWindow.classList.contains('hidden');
             toggleChat(isHidden);
         });
-
         chatCloseBtn.addEventListener('click', () => toggleChat(false));
-        
+
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const question = chatInput.value.trim();
             if (!question) return;
-            
+
             addMessageToChat('user', question);
             chatInput.value = '';
             showTypingIndicator();
@@ -749,26 +841,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 Experience: ${profileData.experience.map(exp => `${exp.role} at ${exp.company}: ${exp.points.join(' ')}`).join('\n')}
                 Projects: ${profileData.projects.map(p => `${p.title}: ${p.description}`).join('\n')}
             `;
-            
+
             const prompt = `
               You are Sathya Balamurugan, a Data Scientist, being interviewed for a role. Answer from the first-person perspective ('I', 'my').
               Your full resume details are provided below. Ground ALL your answers in specific experiences, skills, or projects listed on the resume.
-
               **Response Guidelines:**
               1.  **Be Concise:** Keep answers to 3-4 sentences.
               2.  **Use STAR Method:** For behavioral questions (like 'Tell me about a time...'), structure your answer using the STAR method (Situation, Task, Action, Result). Briefly set the scene, describe your goal, explain your action, and state the quantified outcome.
               3.  **Handle "Questions for Us":** If the user asks if you have questions for them, generate one insightful question based on your resume that shows you've thought about how your skills can benefit their company.
               4.  **Output Format:** Return ONLY a single, valid JSON object like this: {"answer": "Your response as Sathya..."}
-
               **Resume Details:**
               ${fullResumeText}
-
               **Interviewer's Question:**
               "${question}"
             `;
             
+            const chatbotGenerationConfig = {
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "OBJECT",
+                    properties: {
+                        "answer": { "type": "STRING" }
+                    },
+                    required: ["answer"]
+                }
+            };
+
             try {
-                const resultString = await callGeminiAPI(prompt);
+                const resultString = await callGeminiAPI(prompt, chatbotGenerationConfig);
                 const response = parseJsonFromMarkdown(resultString);
                 if (response && response.answer) {
                     addMessageToChat('bot', response.answer);
@@ -777,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (error) {
                 console.error("Chatbot response error:", error);
-                addMessageToChat('bot', `I'm sorry, I had a little trouble processing that: ${error.message}. Could you try rephrasing your question?`);
+                addMessageToChat('bot', `I'm sorry, I had a little trouble processing that. Could you try rephrasing your question?`);
             } finally {
                 hideTypingIndicator();
             }
@@ -810,6 +910,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // --- RENDER FUNCTIONS ---
     function renderProfileHeader() {
         document.getElementById('profile-name').textContent = profileData.name;
         document.getElementById('summary-text').textContent = profileData.summary;
@@ -870,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div>
                     <span class="text-base font-medium text-gray-800">${skill.name}</span>
                 </div>
-                <div class="w-full bg-gray-100 rounded-full h-2 mt-2">
+                <div class="w-full skill-bar-bg rounded-full h-2 mt-2">
                     <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full" style="width: ${skill.level}%"></div>
                 </div>
             `;
@@ -880,11 +981,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderExperience() {
         const container = document.getElementById('experience-timeline');
-        profileData.experience.forEach(job => {
+        profileData.experience.forEach((job, index) => {
             const item = document.createElement('div');
-            item.className = 'grid grid-cols-1 md:grid-cols-4 gap-x-12';
+            item.className = 'grid grid-cols-1 md:grid-cols-4 gap-x-12 relative';
+            const timelineLineHTML = (index < profileData.experience.length - 1) ? '<div class="timeline-line"></div>' : '';
+            
             item.innerHTML = `
-                <div class="md:col-span-1 mb-4 md:mb-0">
+                ${timelineLineHTML}
+                <div class="md:col-span-1 mb-4 md:mb-0 timeline-marker">
                     <h3 class="text-lg font-semibold text-gray-900">${job.role}</h3>
                     <p class="text-gray-600">${job.company}</p>
                     <p class="text-sm text-gray-400 mt-1">${job.period}</p>
@@ -905,8 +1009,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const card = document.createElement('a');
             card.href = project.link;
             card.target = '_blank';
-            card.className = 'group block bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col';
-            
+            card.className = 'group block project-card rounded-2xl hover:border-gray-300 hover:shadow-lg transition-all duration-300 flex flex-col card-hover';
             const techTags = project.tech.split(',').map(t => t.trim()).map(tag =>
                 `<span class="inline-block bg-gray-100 text-gray-700 text-xs font-medium mr-2 mb-2 px-3 py-1 rounded-full">${tag}</span>`
             ).join('');
@@ -932,7 +1035,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const container = document.getElementById('education-list');
         profileData.education.forEach(edu => {
             const item = document.createElement('div');
-            item.className = 'flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 bg-white rounded-xl border border-gray-200';
+            item.className = 'flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 bg-white rounded-xl border border-gray-200 card-hover';
             item.innerHTML = `
                 <div class="mb-2 sm:mb-0">
                     <h3 class="font-semibold text-xl text-gray-800">${edu.degree}</h3>
@@ -944,6 +1047,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // --- ANIMATION & DYNAMIC CONTENT SETUP ---
     function setupTypewriter() {
         const el = document.getElementById('typewriter-text');
         const titles = profileData.titles;
@@ -994,13 +1098,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }, { threshold: 0.1 });
-
         targets.forEach(target => {
             observer.observe(target);
         });
     }
 
-    // --- Initial Render ---
+    // --- INITIALIZE PAGE ---
     renderProfileHeader();
     renderContactInfo();
     renderSkills();
@@ -1013,6 +1116,5 @@ document.addEventListener('DOMContentLoaded', function () {
     setupChatbot();
 });
 </script>
-
 </body>
 </html>

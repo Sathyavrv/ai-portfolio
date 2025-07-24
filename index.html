@@ -430,52 +430,55 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         experience: [
             {
-                role: "Data & Analytics Engineer",
+                role: "Data Scientist",
                 company: "Avyra Technologies",
-                period: "Jun 2024 - Present",
+                period: "Feb 2025 - Jul 2025",
+                location: "Vancouver, BC",
                 points: [
-                    "Architected and launched a cloud-native ERP on AWS, automating 15 modules including sales, inventory, and finance, which reduced manual data entry by 40%.",
-                    "Developed and benchmarked a demand-forecasting model (XGBoost) on historical sales data, improving forecast MAE by 18% to enable dynamic, cost-effective inventory restocking.",
-                    "Built production-grade PySpark ETL workflows on AWS EMR to process 100M+ records monthly, ensuring data integrity for downstream financial modeling.",
+                    "Architected and launched a cloud-native ERP on AWS, automating 15 modules including financial reporting, sales analytics, and inventory management, which reduced manual data entry by 40%.",
+                    "Developed and benchmarked a demand-forecasting model (XGBoost) to predict product sales, improving forecast MAE by 18% to enable dynamic, cost-effective inventory restocking.",
+                    "Built production-grade PySpark ETL workflows on AWS to process 100K+ records monthly, ensuring data integrity and readiness for downstream financial modeling and analytics.",
+                    "Engineered 50+ REST endpoints (FastAPI) with RBAC and optimized PostgreSQL schemas, reducing financial report generation time by 35% while maintaining 99.9% uptime."
                 ]
             },
             {
                 role: "Data Scientist (Capstone)",
-                company: "IECBC",
-                period: "Jan 2024 - Jun 2024",
+                company: "Immigrant Employment Council of BC",
+                period: "Apr 2024 - Jun 2024",
+                location: "Vancouver, BC",
                 points: [
-                    "Facilitated cross-unit KPI workshops and shipped a self-service Power BI lake-house (DAX, Power Query), trimming executive decision cycles by 40%.",
-                    "Built Microsoft Fabrics PySpark pipelines that merged 6 siloed sources, reducing ETL runtime from 2 hours to 50 minutes while raising data freshness to near-real-time.",
-                    "Translated qualitative stakeholder interviews into measurable OKRs, directly informing funding proposals worth $300K and guiding board-level strategy."
+                    "Engineered a production-ready data pipeline using PySpark (Microsoft Fabric) to consolidate 6 disparate sources into a validated, unified foundational data asset, saving 20+ hours of manual work monthly.",
+                    "Designed and built an executive-level Power BI dashboard to visualize key operational metrics, enabling data-driven strategic review by stakeholders."
                 ]
             },
             {
                 role: "Data Scientist (Experiential Learning)",
                 company: "CoverQuick",
                 period: "Oct 2023 - Dec 2023",
+                location: "Remote",
                 points: [
-                    "Designed interactive Tableau cohort funnels that lifted 90-day user retention by 20%, with dashboards now refreshing automatically via Webhooks.",
-                    "Embedded a spaCy NER + BERT scoring micro-service, boosting resume-to-role match precision by 25 percentage points and cutting manual screening hours by 60%.",
-                    "Refactored SQL + Delta-Lake pipelines on Databricks, lowering query latency by 30% and enabling rapid A/B experimentation."
+                    "Developed a proof-of-concept NLP model to enhance a core business process by scoring the semantic relevance between resumes and job descriptions.",
+                    "Utilized spaCy for NER to extract structured entities from text and applied a BERT model to generate similarity scores, demonstrating the ability to automate a key matching function."
                 ]
             },
             {
                 role: "Data Analyst",
-                company: "Cognizant",
-                period: "Dec 2021 - Oct 2022",
+                company: "Sri Kumaran Pharmaceuticals",
+                period: "Oct 2021 - Nov 2022",
+                location: "Chennai, India",
                 points: [
-                    "Partnered with business to deliver self-serve Cognos dashboards, translating complex data to inform $60M in credit-risk decisions and cutting report turnaround from days to hours.",
-                    "Re-engineered legacy PL/SQL batch processes to Spark SQL, slashing overnight processing of 10M+ rows to under 30 minutes (-55%) and saving $35k/yr in compute costs."
+                    "Developed sales forecasting and inventory models for 500+ products, reducing inventory holding costs by 15% while ensuring 99% product availability for 40+ local clinics.",
+                    "Migrated manual reporting from Excel to automated PySpark SQL pipelines with data validation, cutting daily reconciliation time from 4 hours to under 30 minutes and improving financial reporting accuracy."
                 ]
             }
         ],
         projects: [
             {
                 id: "project-1",
-                title: "Unified Fraud Detection & Customer Analytics",
-                tech: "Python, Scikit-Learn, XGBoost, Pandas, K-Means",
-                description: "Engineered an ensemble model to analyze transactions, identifying anomalous patterns of fraud, and applied K-Means clustering to segment the customer base for targeted marketing.",
-                outcome: "Elevated fraud detection accuracy and drove a significant uplift in targeted campaign engagement.",
+                title: "Unified Fraud Detection and Customer Analytics",
+                tech: "Scikit-Learn, Pandas, K-Means Clustering",
+                description: "Developed a supervised fraud detection model using XGBoost on 13M+ transactions, achieving 98% precision and 78% recall. Engineered customer value models by predicting Customer Lifetime Value (CLV) with a Gradient Boosting model built on RFM (Recency, Frequency, Monetary) features. Applied K-Means clustering to segment the customer base, creating distinct data-driven personas to inform targeted client relationship strategies, directly applicable to wealth management segmentation.",
+                outcome: "Achieved high precision fraud detection and created actionable customer segmentation for targeted strategies.",
                 link: "https://github.com/Sathyavrv/Unified-Fraud-Detection/tree/main"
             },
             {
@@ -992,6 +995,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h3 class="text-lg font-semibold text-gray-900">${job.role}</h3>
                     <p class="text-gray-600">${job.company}</p>
                     <p class="text-sm text-gray-400 mt-1">${job.period}</p>
+                    ${job.location ? `<p class="text-sm text-gray-400">${job.location}</p>` : ''}
                 </div>
                 <div class="md:col-span-3">
                     <ul class="space-y-4 text-gray-700 leading-relaxed">
